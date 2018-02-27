@@ -58,7 +58,7 @@ public class ArticleService {
         }
         return summary;
     }
-    
+
     public static void main(String[] args) {
         Article article = new ArticleService().getTitle("https://mp.weixin.qq.com/s?src=3&timestamp=1519715236&ver=1&signature=63P0vex38iAL8VU5A*-eCiczaINMvykUFFV9Ks4lY0hRi45uYOYS9sNU0hUvNf2zEaYbi34Lkrk1uUq0845B-jtu-3p*kAFCbTOX3sD802YAD8TMfWkf-JcWautXMsq8CnHGz5Qt*NKAtCuDuivaCw==");
         System.out.print(article.getTitle());

@@ -13,7 +13,32 @@ jsoup 使用的例子
 </dependency>
 ```
 
+# 关键代码
 
+```java
+public Article getTitle(String url) {
+
+    Article article = new Article();
+    try {
+        // 解析html
+        Document doc = Jsoup.connect(url).get();
+        Element titleElement = doc.select("h2#activity-name").first();
+        String title = titleElement.text();
+        Element contentElement = doc.selectFirst("div#js_content");
+        Element image = contentElement.selectFirst("img");
+        String imageUrl = image.attr("data-src");
+        String summary = getSummary(contentElement.text());
+        // 填充数据模型
+        article.setTitle(title);
+        article.setUrl(url);
+        article.setImageUrl(imageUrl);
+        article.setSummary(summary);
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+    return article;
+}
+```
 
 # 测试
 
