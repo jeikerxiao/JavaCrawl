@@ -62,11 +62,15 @@ http://localhost:8080/test/article
 
 注意：url只支持解析微信公众号文章url.
 
+入参：
+
 ```javascript
 {
 	"url":"https://mp.weixin.qq.com/s?src=3&timestamp=1519715236&ver=1&signature=volzI9BiiaUzRR7Fe-BUR1RPLZ962-SfIRegmjci6G3z8gpnnKb1s39RSqyMu2vJe4t3DFQlDjdWJHFan1NdCn1F2uSn-lfGQCcTPHo-s8ietwN78i4Y9aaVnmyikJ55IlUswyf9Vo13qq9OPN7hKg=="
 }
 ```
+
+响应：
 
 ```javascript
 {
