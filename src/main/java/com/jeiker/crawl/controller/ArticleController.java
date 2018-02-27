@@ -28,6 +28,6 @@ public class ArticleController {
 
     @PostMapping("/article")
     public Article getArticle(@RequestBody ArticleUrl url) {
-        return articleService.getTitle(url.getUrl());
+        return articleService.getArticle(url.getUrl());
     }
 }
