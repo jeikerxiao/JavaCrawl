@@ -1,6 +1,8 @@
 # JavaCrawl
 
-jsoup 使用的例子
+jsoup 使用的例子。
+
+jsoup Document: http://www.open-open.com/jsoup/parsing-a-document.htm
 
 # pom.xml
 
