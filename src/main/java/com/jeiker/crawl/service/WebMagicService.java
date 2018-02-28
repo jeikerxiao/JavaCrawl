@@ -7,8 +7,6 @@ import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.pipeline.ConsolePipeline;
 import us.codecraft.webmagic.processor.PageProcessor;
 
-import java.util.List;
-
 /**
  * @author : xiao
  * @date : 2018/2/27 下午4:44
@@ -33,7 +31,7 @@ public class WebMagicService implements PageProcessor{
 
     public static void main(String[] args) {
         Spider.create(new WebMagicService())
-                .addUrl("https://mp.weixin.qq.com/s?src=11&timestamp=1519723067&ver=724&signature=TXwSeOOehBEOy*kjcAZr5GQGNimYCRluuIBIRlB3DMulssP-MrIPXJERm*OTiUhmAsDUq0CC0u1jA9WojuJWU8iJo21YZmpoLQJNXvA9KgANWhT6jOxSJT0tTp1r2gdW&new=1")
+                .addUrl("https://mp.weixin.qq.com/s/gTUTjsq5DZ6-cP-f_xTMhQ")
                 .addPipeline(new ConsolePipeline())
                 .run();
     }

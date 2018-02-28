@@ -4,6 +4,8 @@ import com.jeiker.crawl.model.Article;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -16,6 +18,8 @@ import java.io.IOException;
 @Service
 public class ArticleService {
 
+    private static final Logger logger = LoggerFactory.getLogger(ArticleService.class);
+
 
     public Article getArticle(String url) {
 
@@ -23,25 +27,40 @@ public class ArticleService {
         try {
             // 解析html
             Document doc = Jsoup.connect(url).get();
-            Element titleElement = doc.select("h2#activity-name").first();
-            String title = titleElement.text();
+
+            Element titleElement = doc.selectFirst("h2#activity-name");
+            String title = "";
+            if (titleElement != null) {
+                title = titleElement.text();
+            }
+
             Element contentElement = doc.selectFirst("div#js_content");
-            Element image = contentElement.selectFirst("img");
-            String imageUrl = image.attr("data-src");
-            String summary = getSummary(contentElement.text());
+            String content = "";
+            String imageUrl = "";
+            if (contentElement != null) {
+                content = contentElement.text();
+
+                Element image = contentElement.selectFirst("img");
+                if (image != null) {
+                    imageUrl = image.attr("data-src");
+                }
+            }
+            String summary = getSummary(content);
+
             // 填充数据模型
             article.setTitle(title);
             article.setUrl(url);
             article.setImageUrl(imageUrl);
             article.setSummary(summary);
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("html analysis error: {}", e);
         }
         return article;
     }
 
     /**
      * 获取文章摘要
+     *
      * @param content
      * @return
      */
@@ -60,7 +79,7 @@ public class ArticleService {
     }
 
     public static void main(String[] args) {
-        Article article = new ArticleService().getArticle("https://mp.weixin.qq.com/s?src=3&timestamp=1519715236&ver=1&signature=63P0vex38iAL8VU5A*-eCiczaINMvykUFFV9Ks4lY0hRi45uYOYS9sNU0hUvNf2zEaYbi34Lkrk1uUq0845B-jtu-3p*kAFCbTOX3sD802YAD8TMfWkf-JcWautXMsq8CnHGz5Qt*NKAtCuDuivaCw==");
+        Article article = new ArticleService().getArticle("https://mp.weixin.qq.com/s/gTUTjsq5DZ6-cP-f_xTMhQ");
         System.out.print(article.getTitle());
     }
 }
